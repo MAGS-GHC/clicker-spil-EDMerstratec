@@ -4,10 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clicker Spil</title>
-    <script src="app.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
+
+
 <body>
-    
+    <h1>Clicker Game</h1>
+    <p id='showHighScore'></p>
+    <p id="showCurrentScore"><b></b></p>
+    <p id="showCurrency"></p>
+    <!-- <center> </center> -->
+    <button onClick="clickCount()">Click for Score!</button>
+    <button onClick="upgradeClickLevel()">Upgrade Clicks!</button>
+    <button onClick="upgradeAutoClick()">Autoclick Upper(WIP)</button>
+    <p id="showClickLevel"></p>
+    <p id="showAutoClicks"></p>
+    <button onClick="resetButton()">Reset Game</button>
+    <!-- SCRIPT VAR DEFINES HERE, MUST BE AFTER ID-->
+    <script src="functions.js"></script>
+    <!--<script>document.getElementById('output').innerHTML = "test";</script>-->
 </body>
 </html>
