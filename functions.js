@@ -3,20 +3,21 @@ let clicks = 0; //alternatively, Currency
 let currentScore = 0;//DEFAULT 0. Equals clicks earned, minus clicks spent
 let highScore = 25; //DEFAULT 0
 
-//let autoClickInterval = 1000; //interval for autoClick. 1000 = 1sec
 let autoClickLevel = 0; //level of autoclick upgrade at start
-let autoClickDiv = 1; //used as divisor for seconds on passive clicks DEFAULT 1.0. Maybe cut and use autoClickLevel square root?
+let autoClickDiv = 1; //used as divisor for seconds on passive clicks
 let clickScoreMult = 1; //each level multiplies each click. DEFAULT 1
 
 //DEFINE COSTS OF UPGRADES
-let costAutoClickUp = 7; //cost value 7 for testing
+let costAutoClickUp = 7; //cost values lower for testing
 let costClickUp = 5; //
+
+
+let intervalAutoClick = window.setInterval(autoClicker, (10000));//calls autoClicker function below every 10000ms (10sec)
+//clearInterval(intervalNameHere) stops function entirely
 
 //Below added to initialize score/level displays
 updateShownValues();
 
-//check score and update if higher than old high score
-//let document.getElementById("highScore").innerHTML = highScore;
 
 ////////////////////////Initialization done, functions start
 
@@ -32,8 +33,8 @@ function clickCount() { //add clicks*clickLevel to counter when button is presse
 
 
 function upgradeClickLevel() { //called to upgrade score per click
-    if (clicks >= (costClickUp * clickScoreMult)) { //cost * currentlevel
-        clicks -= (clickScoreMult*costClickUp);
+    if (clicks >= (costClickUp * clickScoreMult)) { // check if cost * currentlevel met
+        clicks -= (clickScoreMult*costClickUp); //subtract cost
         clickScoreMult++;
         updateShownValues();
     }
@@ -43,19 +44,21 @@ function upgradeAutoClick() {//called to upgrade autoclick
     if (clicks >= (costAutoClickUp * (autoClickLevel+1))) {//level 0 default, so +1
         autoClickLevel++
         clicks -= (costAutoClickUp*autoClickLevel)
-        autoClickDiv = autoClickDiv + 0.2 //reduces interval in autoClicker
+        autoClickDiv = (autoClickDiv + 1) //reduces interval in autoClicker. Could be autoClickDiv++ or +=, but leaving as is while playing with values
         updateShownValues();
        // window.setInterval(autoClicker(){})
+       clearInterval(intervalAutoClick);
+       intervalAutoClick = window.setInterval(autoClicker, (10000/autoClickDiv));
     }
 }
-let intervalAutoClick = window.setInterval(function autoClicker() {
+
+function autoClicker() {
     if (autoClickLevel === 0) {}
     else {
     clicks += clickScoreMult; //functions like a regular click, including upgrades. Could define other value for autoclicks only. clicks++ simplest
     updateShownValues();
     }
-}, (5000/(autoClickDiv*5)));
-//clearInterval(intervalNameHere) stops function entirely
+}
 
 
 
@@ -63,8 +66,8 @@ function updateShownValues() {
     document.getElementById('showCurrentScore').innerHTML = ("Current Score: " + currentScore);
     document.getElementById('showHighScore').innerHTML = ("High Score: " + highScore);
     document.getElementById('showCurrency').innerHTML = ("Score to spend: " + clicks);
-    document.getElementById('showClickLevel').innerHTML = ("Clicks add " + clickScoreMult + " score");
-    document.getElementById('showAutoClicks').innerHTML = ("Autoclicker level is: " + autoClickLevel);
+    document.getElementById('showClickLevel').innerHTML = ("Clicks add " + clickScoreMult + " score - Upgrade Cost: " + (costClickUp * clickScoreMult));
+    document.getElementById('showAutoClicks').innerHTML = ("Autoclicker level is: " + autoClickLevel + " - Upgrade Cost: " + (costAutoClickUp * (autoClickLevel+1)));
 }
 
 function resetButton() {
