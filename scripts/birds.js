@@ -5,3 +5,4 @@
 
 
 //one interval with random chance of bird movement here. Alternatively 4 intervals
+//updateShownValues()
