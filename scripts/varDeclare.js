@@ -10,5 +10,13 @@ let currentScore = 0; //current score. Sunflowers collected
 
 let scarecrow = false; //Upgrade in birds.js 
 let birdInterval = window.setInterval(() => { //sets initial bird interval blank for pre-game
-    console.log("Cacaw");
 }, 100000);
+let birdCheck = 0.0; //used to store random value for bird appearance
+
+
+
+
+//Sunflowers... let's try this
+//8 sunflowers in total, track health by 
+const sunflowerHP = [0,0,0,0,0,0,0,0]; //8 sunflower health values to track. EDIT LATER: failed to initialize at set length with no manual values, try to get working
+sunflowerHP.fill(100, 0, 8); //function to fill 100 into all spots in array from 0 to 7 (ends "before index 8" at 7)

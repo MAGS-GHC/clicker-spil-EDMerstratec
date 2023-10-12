@@ -22,10 +22,16 @@ function startRound() {
         case 1: //summer, round 2 start
             roundNumber = 2;
             roundTimer = window.setTimeout(endRound, roundDuration);
+            birdInterval = window.setInterval(() => { //sets round1 birdInterval
+                //function to call bird
+            }, 10000);
             break;
         case 2:
             roundNumber = 3; //autumn, round 3 start
             roundTimer = window.setTimeout(endRound, roundDuration);
+            birdInterval = window.setInterval(() => { //sets round1 birdInterval
+                //function to call bird
+            }, 10000);
             break;
         default:
              console.log("Error roundNumber");
@@ -33,13 +39,15 @@ function startRound() {
 }
 
 function endRound() {
-    //console.log("Roundend log")
+    //console.log("Roundend log") //test trigger
  //   if (roundNumber === 3) { //Let's try to replace with a ternary
  //       endGame()
  //   }
  //   else {
  //       updateBackground((roundNumber+1));
  //   }
+ 
+    clearInterval(birdInterval); //round over, no more birdies
     (roundNumber === 3) ? endGame() : updateBackground((roundNumber+1));
 }
 
@@ -47,6 +55,7 @@ function endRound() {
 
 function endGame() { //reset values for another game
     roundNumber = 0;
+    sunflowerHP.fill(100, 0, 8); //function to fill 100 into all spots in array from 0 to 7 
     updateBackground(roundNumber);
     scarecrow = false;
 }

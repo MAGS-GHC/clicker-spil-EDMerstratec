@@ -1,0 +1,26 @@
+Refinements:
+    varDeclare.js
+    const sunflowerHP = [0,0,0,0,0,0,0,0]. Change to push values into empty array or define pre-set empty length
+
+    condense birdInterval set in roundTracking into function 
+
+
+
+
+
+New Features: 
+    Pause function? 
+
+    function calling random birds
+
+    add/remove pics when clicked or advanced (birds.js and sunflowers specifically)
+
+
+    priority list:
+    1 - place sunflower tokens in proper place 
+        update by season or growth cycle, maybe health? 
+    2 - place randomized birds in 3 stages. Reset when clicked 
+        build HP reduction function for stage 3
+    3 - scarecrow update + model
+    4 - Way to make $$$
+    5 - Score? Maybe = sum of remaining sunflower health 

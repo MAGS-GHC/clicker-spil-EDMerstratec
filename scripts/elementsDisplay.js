@@ -11,7 +11,7 @@ function updateScoreValues() { //called many places to update score and cash val
 }
 
 function updateBackground(round) {
-    switch (round) {
+    switch (round) {//change background to match upcoming round
         case 0:
             document.body.style.backgroundImage = "url('icons/BGWinter.png')";
             break;
