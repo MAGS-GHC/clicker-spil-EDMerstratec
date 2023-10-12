@@ -13,6 +13,7 @@ function startRound() {
             cash = 2500;
             updateScoreValues();
             roundNumber = 1;
+            updateBackground(roundNumber); //set background to Spring. Otherwise handled at end of rounds
             birdInterval = window.setInterval(() => { //sets round1 birdInterval
                 //function to call bird
             }, 10000);
@@ -32,12 +33,20 @@ function startRound() {
 }
 
 function endRound() {
-    console.log("Roundend log")
+    //console.log("Roundend log")
+ //   if (roundNumber === 3) { //Let's try to replace with a ternary
+ //       endGame()
+ //   }
+ //   else {
+ //       updateBackground((roundNumber+1));
+ //   }
+    (roundNumber === 3) ? endGame() : updateBackground((roundNumber+1));
 }
 
 
 
 function endGame() { //reset values for another game
     roundNumber = 0;
+    updateBackground(roundNumber);
     scarecrow = false;
 }
