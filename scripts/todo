@@ -1,6 +1,7 @@
 Refinements:
     varDeclare.js
     const sunflowerHP = [0,0,0,0,0,0,0,0]. Change to push values into empty array or define pre-set empty length
+    same with birdStages 
 
     condense birdInterval set in roundTracking into function 
 
@@ -24,3 +25,7 @@ New Features:
     3 - scarecrow update + model
     4 - Way to make $$$
     5 - Score? Maybe = sum of remaining sunflower health 
+
+
+changes for DEBUG
+    varDeclare: roundDuration 3000

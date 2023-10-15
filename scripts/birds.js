@@ -7,7 +7,7 @@
 //one interval with random chance of bird movement here. Alternatively 4 intervals
 //updateShownValues()
 
-function birdUpdate() {
+function birdUpdate() { //function to check how many birds will be advanced
     //insert birds changing
     birdCheck = Math.random(); //randomized bird check effect
     scarecrow ? (birdCheck /= 2) : console.log("A scarecrow sure would help...") ; //if scarecrow, halve random check
@@ -20,20 +20,26 @@ function birdUpdate() {
         case 3:
             birdCheck *=2
             break;
-        default: //do nothing if round 1
-            console.log("Error in birdUpdate")
+        default: //do nothing if round invalid
+            console.log("Error in birdUpdate") //test catch
     }
-
+       // console.log(birdCheck) tested
     if (birdCheck < 0.2) {
         //no birds
     }
     else if (birdCheck < 0.4) {
-        //2 birds advance
+        birdsAdvanced(2);
     }
     else if (birdCheck < 0.8) {
-        //4 birds advance
+        birdsAdvanced(4);
     }
     else if (birdCheck < 1.2) {
-        //8 birds advance
+        birdsAdvanced(8); //8 birds advance
     }
 }
+
+function birdsAdvanced(birds) {
+    //console.log(birds); tested
+}
+
+//function birdsEatHP define here or in sunflowers?

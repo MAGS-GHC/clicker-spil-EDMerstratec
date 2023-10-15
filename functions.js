@@ -1,7 +1,7 @@
 let clicks = 0; //alternatively, Currency. Clicks earnt minus spent
 
 let currentScore = 0;//DEFAULT 0. Equals all clicks earnt, doesn't count spent
-let highScore = 25; //DEFAULT 0. Set 25 for testing
+let highScore = 0; //DEFAULT 0. Set 25 for testing
 
 let autoClickLevel = 0; //level of autoclick upgrade at start
 let autoClickDiv = 1; //used as divisor for seconds on passive clicks
@@ -14,8 +14,13 @@ let costClickUp = 5; //
 let intervalAutoClick = window.setInterval(autoClicker, (10000));//calls autoClicker function below every 10000ms (10sec)
 //clearInterval(intervalNameHere) stops function entirely. Must clear + restart interval when interval timer (10000) is altered, or it won't update. Done in upgradeAutoClick function
 
-
-//Below added to initialize score/level displays
+//check and implement cookie-saved high score
+    if (highScore === 0) {
+        let tempString = document.cookie //document.cookie returns "highScore=##"
+        tempString = tempString.replace("highScore=", ""); //so we cut the initial part. Only works this simply because we're working with a single cookie
+        highScore = parseInt(tempString) //parse our high score as number, set high score
+    }
+    //Below added to initialize score/level displays
 updateShownValues();
 
 
@@ -24,7 +29,6 @@ updateShownValues();
 function clickCount() { //add clicks*clickLevel to counter when button is pressed
     clicks += clickScoreMult; // = (clicks++ * clickScoreMult), didn't work);
     currentScore += clickScoreMult;
-    if (currentScore > highScore) { highScore = currentScore};
     //console.log(clicks) //for testing
     //console.log(currentScore)
     //console.log(highScore)
@@ -61,6 +65,7 @@ function autoClicker() { //called by intervalAutoClick
     if (autoClickLevel === 0) {}
     else {
     clicks += clickScoreMult; //functions like a regular click, including upgrades. Could define other value for autoclicks only. clicks++ simplest
+    currentScore += clickScoreMult;
     updateShownValues();
     }
 }
@@ -68,8 +73,12 @@ function autoClicker() { //called by intervalAutoClick
 
 
 function updateShownValues() {
+    if (currentScore > highScore) { 
+        highScore = currentScore
+        document.cookie = "highScore=" + highScore + "; max-age=" + 60*60*24*7; //set cookie highScore, expires in seconds*minutes*hours*days, 7 days
+    }
     document.getElementById('showCurrentScore').innerHTML = ("Current Score: " + currentScore);
-    document.getElementById('showHighScore').innerHTML = ("High Score: " + highScore);
+    document.getElementById('showHighScore').innerHTML = ("High Score: " + highScore); 
     document.getElementById('showCurrency').innerHTML = ("Score to spend: " + clicks);
     document.getElementById('showClickLevel').innerHTML = ("Clicks add " + clickScoreMult + " score - Upgrade Cost: " + (costClickUp * clickScoreMult));
     document.getElementById('showAutoClicks').innerHTML = ("Autoclicker level is: " + autoClickLevel + " - Upgrade Cost: " + (costAutoClickUp * (autoClickLevel+1)));

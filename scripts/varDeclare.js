@@ -12,6 +12,7 @@ let scarecrow = false; //Upgrade in birds.js
 let birdInterval = window.setInterval(() => { //sets initial bird interval blank for pre-game
 }, 100000);
 let birdCheck = 0.0; //used to store random value for bird appearance
+let birdStages = [0,0,0,0,0,0,0,0] //
 
 
 
